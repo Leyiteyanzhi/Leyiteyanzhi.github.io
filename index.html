@@ -229,6 +229,128 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Objecticve-C中的数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/05/Objecticve-C中的数组/" itemprop="url">Objective-C中的数组</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-05T21:59:03+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="NSArray（不可变数组）"><a href="#NSArray（不可变数组）" class="headerlink" title="NSArray（不可变数组）"></a>NSArray（不可变数组）</h2><h3 id="创建数组和初始化"><a href="#创建数组和初始化" class="headerlink" title="创建数组和初始化"></a>创建数组和初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//初始化，创建一个空数组</span><br><span class="line">NSArray *array1 = [[NSArray alloc] init];</span><br><span class="line">NSArray *array2 = [NSArray array];</span><br><span class="line"></span><br><span class="line">//创建只有一个元素的不可变数组</span><br><span class="line">NSArray *array3 = [NSArray arrayWithObject:@&quot;a&quot;];</span><br><span class="line"></span><br><span class="line">//创建有多个元素的不可变数组(以nil结尾，nil后面的元素不添加入数组内)</span><br><span class="line">NSArray *array4 = [NSArray arrayWithObjects:@&quot;a&quot;,@&quot;b&quot;,@&quot;c&quot;, nil];</span><br><span class="line"></span><br><span class="line">//另一种创建数组的方式</span><br><span class="line">NSArray *array5 = @[@&quot;a&quot;];</span><br><span class="line">NSArray *array6 = @[@&quot;a&quot;,@&quot;b&quot;,@&quot;c&quot;];</span><br><span class="line"></span><br><span class="line">//根据一个数组生成一个新数组</span><br><span class="line">NSArray *array7 = [NSArray arrayWithArray:array6];</span><br></pre></td></tr></table></figure>
+<h3 id="数组的操作"><a href="#数组的操作" class="headerlink" title="数组的操作"></a>数组的操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">//访问array4中第n个元素</span><br><span class="line">NSString *str1 = [array4 objectAtIndex:0];//第0个元素</span><br><span class="line">NSString *str2 = array4[0];</span><br><span class="line"></span><br><span class="line">//数组的遍历-for</span><br><span class="line">for (int i = 0; i &lt; array4.count; i++)&#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;,[array4 objectAtIndex:i]); //array4[i];一样可以</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//数组的遍历-for in</span><br><span class="line">for (NSString *str in array4) &#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;,str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//使用系统提供的枚举类型</span><br><span class="line">NSEnumerator *enumerator = [array3 objectEnumerator];</span><br><span class="line">id obj;//遇到nil，条件不成立，跳出循环</span><br><span class="line">while (obj = [enumerator nextObject]) &#123;</span><br><span class="line">    //使用枚举器遍历数组时，不能添加或删除数组元素，否则运行时程序就会崩溃</span><br><span class="line">    NSLog(@&quot;%@&quot;,obj);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//通过数组元素查找下标</span><br><span class="line">NSUInteger index = [array4 indexOfObject:@&quot;a&quot;];</span><br><span class="line">NSLog(@&quot;下标：%zd&quot;,index);</span><br><span class="line"></span><br><span class="line">//判断数组中是否存在某个元素</span><br><span class="line">if ([array4 containsObject:@&quot;a&quot;])&#123;</span><br><span class="line">    NSLog(@&quot;包含此元素&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//获取数组的首尾</span><br><span class="line">NSLog(@&quot;first object: %@&quot;,array4.firstObject);</span><br><span class="line">NSLog(@&quot;last object: %@&quot;,array4.lastObject);</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;--------------------&quot;);</span><br><span class="line">//向不可变数组增加元素</span><br><span class="line">NSArray *nArray1 = [array4 arrayByAddingObject:@&quot;d&quot;];</span><br><span class="line"></span><br><span class="line">NSArray *nArray2 = [array4 arrayByAddingObjectsFromArray:array3];</span><br><span class="line"></span><br><span class="line">NSString *string1 = [nArray2 componentsJoinedByString:@&quot;-&quot;];//将一个数组以-将数组每个元素连接</span><br><span class="line"></span><br><span class="line">NSArray *nArray3 = [string1 componentsSeparatedByString:@&quot;-&quot;];//将一个字符串以-分割成数组</span><br></pre></td></tr></table></figure>
+<h2 id="NSMutableArray（可变数组）"><a href="#NSMutableArray（可变数组）" class="headerlink" title="NSMutableArray（可变数组）"></a>NSMutableArray（可变数组）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">//可变数组的初始化</span><br><span class="line">NSMutableArray *mArray1 = [[NSMutableArray alloc] init];</span><br><span class="line"></span><br><span class="line">//创建只有一个元素的数组</span><br><span class="line">NSMutableArray *mArray2 = [NSMutableArray arrayWithObject:@&quot;aaa&quot;];</span><br><span class="line"></span><br><span class="line">//创建有多个元素的数组</span><br><span class="line">NSMutableArray *mArray3 = [NSMutableArray arrayWithObjects:@&quot;aaa&quot;,@&quot;bbb&quot;,@&quot;ccc&quot;, nil];</span><br><span class="line"></span><br><span class="line">//根据一个数组创建一个新数组</span><br><span class="line">NSMutableArray *mArray4 = [NSMutableArray arrayWithArray:mArray3];</span><br><span class="line"></span><br><span class="line">//可变数组独有，不可变数组没有的方法</span><br><span class="line">NSMutableArray *mArray5 = [NSMutableArray arrayWithCapacity:4];//初始化可变数组的长度，如果后面代码继续添加数组超过长度后会自动扩充</span><br><span class="line"></span><br><span class="line">//增加</span><br><span class="line">//在数组末尾添加一个元素</span><br><span class="line">[mArray3 addObject:@&quot;ddd&quot;];</span><br><span class="line"></span><br><span class="line">//在指定位置末尾插入一个元素</span><br><span class="line">[mArray3 insertObject:@&quot;new&quot; atIndex:3];//插入索引值前</span><br><span class="line"></span><br><span class="line">//替换</span><br><span class="line">[mArray3 replaceObjectAtIndex:1 withObject:@&quot;hhh&quot;];</span><br><span class="line"></span><br><span class="line">//交换</span><br><span class="line">[mArray3 exchangeObjectAtIndex:2 withObjectAtIndex:3];//将索引值为2和3的元素交换位置</span><br><span class="line"></span><br><span class="line">//删除指定的元素</span><br><span class="line">[mArray3 removeObject:@&quot;aaa&quot;];</span><br><span class="line"></span><br><span class="line">//删除指定位置上的元素(根据索引值）</span><br><span class="line">[mArray3 removeObjectAtIndex:1];</span><br><span class="line"></span><br><span class="line">//删除数组中最后一个元素</span><br><span class="line">[mArray3 removeLastObject];</span><br><span class="line"></span><br><span class="line">//删除数组中全部元素</span><br><span class="line">[mArray4 removeAllObjects];</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/Objective-C中的字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -513,7 +635,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
