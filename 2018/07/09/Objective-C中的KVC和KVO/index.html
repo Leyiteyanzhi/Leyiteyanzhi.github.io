@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="KVCKVC是什么​    在objective中KVC类似于Java中的反射机制，通过破坏封装性去访问类中的私有变量。利用字符串的方式去动态控制一个对象，这种方式也就是Key Value Coding（简称KVC） KVC的基本用法 动态设置  setValue:属性值 forKey:key(属性名)（用于简单路径） setValue:属性值 forKeyPath:key(属性路径) （用于复合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C中的KVC和KVO">
+<meta property="og:url" content="http://yoursite.com/2018/07/09/Objective-C中的KVC和KVO/index.html">
+<meta property="og:site_name" content="0-1">
+<meta property="og:description" content="KVCKVC是什么​    在objective中KVC类似于Java中的反射机制，通过破坏封装性去访问类中的私有变量。利用字符串的方式去动态控制一个对象，这种方式也就是Key Value Coding（简称KVC） KVC的基本用法 动态设置  setValue:属性值 forKey:key(属性名)（用于简单路径） setValue:属性值 forKeyPath:key(属性路径) （用于复合">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-09T06:15:41.186Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Objective-C中的KVC和KVO">
+<meta name="twitter:description" content="KVCKVC是什么​    在objective中KVC类似于Java中的反射机制，通过破坏封装性去访问类中的私有变量。利用字符串的方式去动态控制一个对象，这种方式也就是Key Value Coding（简称KVC） KVC的基本用法 动态设置  setValue:属性值 forKey:key(属性名)（用于简单路径） setValue:属性值 forKeyPath:key(属性路径) （用于复合">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/09/Objective-C中的KVC和KVO/"/>
+
+
+
+
+
+  <title>Objective-C中的KVC和KVO | 0-1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0-1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/Objective-C中的KVC和KVO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leyiteyanzhi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0-1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Objective-C中的KVC和KVO</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T14:13:55+08:00">
+                2018-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="KVC"><a href="#KVC" class="headerlink" title="KVC"></a>KVC</h2><h3 id="KVC是什么"><a href="#KVC是什么" class="headerlink" title="KVC是什么"></a>KVC是什么</h3><p>​    在objective中KVC类似于Java中的反射机制，通过破坏封装性去访问类中的私有变量。利用字符串的方式去动态控制一个对象，这种方式也就是Key Value Coding（简称KVC）</p>
+<h3 id="KVC的基本用法"><a href="#KVC的基本用法" class="headerlink" title="KVC的基本用法"></a>KVC的基本用法</h3><ol>
+<li><p>动态设置</p>
+<ul>
+<li>setValue:属性值 forKey:key(属性名)（用于简单路径）</li>
+<li>setValue:属性值 forKeyPath:key(属性路径) （用于复合路径）</li>
+</ul>
+</li>
+<li><p>动态读取</p>
+<ul>
+<li>valueForKey:属性名</li>
+<li>valueForKeyPath:属性名（用于复合路径）</li>
+</ul>
+</li>
+<li><p>注意事项</p>
+<p>因为key能反复嵌套，因此keyPath的存在是很有必要的，用来把一个一个key连接起来，就可以根据此路径访问到key</p>
+</li>
+</ol>
+<h3 id="使用范例"><a href="#使用范例" class="headerlink" title="使用范例"></a>使用范例</h3><p><strong>Reader.h</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface Reader : NSObject</span><br><span class="line">&#123;</span><br><span class="line">    NSString *_name;</span><br><span class="line">    NSArray *_ownBook;	//读者拥有的书，一个读者可以有多本书</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>​    在读者类中定义了读者的名字和读者的书籍数组</p>
+<p><strong>Reader.m</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;Reader.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation Reader</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p><strong>Book.h</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line">#import &quot;Reader.h&quot;</span><br><span class="line"></span><br><span class="line">//定义了一个读者属性、书的名字、书的价格</span><br><span class="line">@interface Book : NSObject</span><br><span class="line">&#123;</span><br><span class="line">    Reader *_reader;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@property NSString *name;</span><br><span class="line">@property float price;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>​    书籍类中定义了一个读者属性、书的名字、书的价格</p>
+<p><strong>Book.m</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;Book.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation Book</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p><strong>main.m</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line">#import &quot;Reader.h&quot;</span><br><span class="line">#import &quot;Book.h&quot;</span><br><span class="line"></span><br><span class="line">int main(int argc, const char * argv[]) &#123;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        Reader *reader = [[Reader alloc] init];</span><br><span class="line">        [reader setValue:@&quot;litianzhi&quot; forKey:@&quot;name&quot;];</span><br><span class="line">        </span><br><span class="line">        Book *book1 = [[Book alloc] init];</span><br><span class="line">        book1.name = @&quot;santi&quot;;</span><br><span class="line">        book1.price = 100;</span><br><span class="line">        Book *book2 = [[Book alloc] init];</span><br><span class="line">        book2.name = @&quot;baijingshuju&quot;;</span><br><span class="line">        book2.price = 99;</span><br><span class="line">        NSArray *array = [NSArray arrayWithObjects:book1, book2, nil];</span><br><span class="line">        </span><br><span class="line">        [reader setValue:array forKeyPath:@&quot;ownBook&quot;];</span><br><span class="line">        </span><br><span class="line">        //基本数据类型会自动被包装成NSNumber,装到数组中</span><br><span class="line">        //得到所有书本的价格</span><br><span class="line">        NSArray *allPrice = [reader valueForKeyPath:@&quot;ownBook.price&quot;];</span><br><span class="line">        NSLog(@&quot;%@&quot;,allPrice);</span><br><span class="line">        </span><br><span class="line">        NSNumber *count = [reader valueForKeyPath:@&quot;ownBook.@count&quot;];</span><br><span class="line">        NSLog(@&quot;%@&quot;,count);</span><br><span class="line">        </span><br><span class="line">        NSNumber *sum = [reader valueForKeyPath:@&quot;ownBook.@sum.price&quot;];</span><br><span class="line">        NSLog(@&quot;%@&quot;,sum);</span><br><span class="line">        </span><br><span class="line">        NSNumber *avg = [reader valueForKeyPath:@&quot;ownBook.@avg.price&quot;];</span><br><span class="line">        NSLog(@&quot;%@&quot;,avg);</span><br><span class="line">        </span><br><span class="line">        NSString *readerName = [reader valueForKey:@&quot;name&quot;];</span><br><span class="line">        NSLog(@&quot;%@&quot;,readerName);</span><br><span class="line">        </span><br><span class="line">        //获取最大值和最小值</span><br><span class="line">        NSNumber *max = [reader valueForKeyPath:@&quot;ownBook.@max.price&quot;];</span><br><span class="line">        NSLog(@&quot;%@&quot;,max);</span><br><span class="line">        </span><br><span class="line">        NSNumber *min = [reader valueForKeyPath:@&quot;ownBook.@min.price&quot;];</span><br><span class="line">        NSLog(@&quot;%@&quot;,min);</span><br><span class="line">                                </span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    首先通过kvc设置作者名字和书本数组，@”ownBook.price”就是对键值路径的使用，其中@sum、@avg、@max等是特定的写法，可以把它们看成一个方法来使用，通过点号来进行使用。</p>
+<h2 id="KVO"><a href="#KVO" class="headerlink" title="KVO"></a>KVO</h2><h3 id="KVO是什么"><a href="#KVO是什么" class="headerlink" title="KVO是什么"></a>KVO是什么</h3><p>​    KVO其实是一种观察者模式，它的作用是用来监听类中属性值的变化，当数据模型的属性值改变之后作为监听器的视图组件就会被激发，激发时就会回调监听器自身。在Objective-C中几乎所有的OC对象都可以使用KVO。</p>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><ol>
+<li>注册指定Key路径的监听器： addObserver: forKeyPath: options:  context:</li>
+<li>删除指定Key路径的监听器： removeObserver: forKeyPath、removeObserver: forKeyPath: context:</li>
+<li>回调监听： observeValueForKeyPath: ofObject: change: context:</li>
+</ol>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ol>
+<li>注册，指定观察者的属性</li>
+<li>实现回调方法</li>
+<li>移除观察</li>
+</ol>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><p><strong>kid.h</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface Kid : NSObject</span><br><span class="line"></span><br><span class="line">@property NSInteger *moodlevel;</span><br><span class="line">@property NSInteger *hurrylevel;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>定义一个Kid类，其中有两个属性为心情度和饥饿度</p>
+<p> <strong>Kid.m</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;Kid.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation Kid</span><br><span class="line"></span><br><span class="line">- (instancetype)init</span><br><span class="line">&#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    if (self) &#123;</span><br><span class="line">        //设置一个定时器</span><br><span class="line">        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void) timerAction:(NSTimer *) timer</span><br><span class="line">&#123;</span><br><span class="line">    int level = _moodlevel;</span><br><span class="line">    [self setMoodlevel:--level];</span><br><span class="line">    </span><br><span class="line">    int levels = _hurrylevel;</span><br><span class="line">    [self setHurrylevel:--levels];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>在初始化方法中，设置一个定时器每隔1s修改kid类的值</p>
+<p><strong>Parent.h</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">@class Kid;</span><br><span class="line"></span><br><span class="line">@interface Parent : NSObject</span><br><span class="line">&#123;</span><br><span class="line">    Kid *_kid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id) initWithKid:(Kid *)kid;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>Parent.h中定义一个孩子属性</p>
+<p><strong>Parent.m</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;Parent.h&quot;</span><br><span class="line">#import &quot;Kid.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation Parent</span><br><span class="line"></span><br><span class="line">- (id)initWithKid:(Kid *)kid</span><br><span class="line">&#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    if (self != nil) &#123;</span><br><span class="line">        _kid = kid;</span><br><span class="line">        </span><br><span class="line">        //观察kid的moodlevel</span><br><span class="line">        //使用KVO为_kid对象添加一个观察者，用于观察moodlevel属性值是否被修改</span><br><span class="line">        [_kid addObserver:self forKeyPath:@&quot;moodlevel&quot; options:NSKeyValueObservingOptionNew |NSKeyValueObservingOptionOld context:@&quot;content&quot;];</span><br><span class="line">        </span><br><span class="line">        //观察hurrylevel</span><br><span class="line">        [_kid addObserver:self forKeyPath:@&quot;hurry&quot; options:NSKeyValueObservingOptionNew |NSKeyValueObservingOptionOld context:@&quot;content&quot;];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//触发方法</span><br><span class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context</span><br><span class="line">&#123;</span><br><span class="line">    //通过打印change，可以查看对应的key</span><br><span class="line">    NSLog(@&quot;%@&quot;,change);</span><br><span class="line">    </span><br><span class="line">    //通过keyPath来判断不同属性的观察者</span><br><span class="line">    if ([keyPath isEqualToString:@&quot;moodlevel&quot;]) &#123;</span><br><span class="line">        NSNumber *moodlevel = [change objectForKey:@&quot;new&quot;];</span><br><span class="line">        </span><br><span class="line">        NSInteger *level = [moodlevel integerValue];</span><br><span class="line">        </span><br><span class="line">        if (level &lt; 90) &#123;</span><br><span class="line">            //...</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else if ([keyPath isEqualToString:@&quot;hurrylevel&quot;])&#123;</span><br><span class="line">        NSNumber *hurrylevel = [change objectForKey:@&quot;new&quot;];//修改后的值</span><br><span class="line">        </span><br><span class="line">        NSInteger *level = [hurrylevel integerValue];</span><br><span class="line">        </span><br><span class="line">        if (level &lt; 90) &#123;</span><br><span class="line">            //...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    NSLog(@&quot;%@&quot;,context);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)dealloc</span><br><span class="line">&#123;</span><br><span class="line">    //移除观察者</span><br><span class="line">    [_kid removeObserver:self forKeyPath:@&quot;moodlevel&quot;];</span><br><span class="line">    [_kid removeObserver:self forKeyPath:@&quot;hurrylevel&quot;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>这里开始监听操作：</p>
+<ol>
+<li>首先，使用addObserver方法给kid监听对象，第一个参数为监听者，这里的监听者为Parent，因此可以直接传递self；第二个参数为监听对象的属性名；第三个参数为这个属性的状态，可以使用“|”符进行多种组合操作；第四个参数为传递内容给监听方法。</li>
+<li>其次是监听方法。此方法在监听者中实现，当属性发生改变时，这个方法就会被回调。第一参数为键值路径，第二个参数为监听对象，第三个对象为变化的值，第四个参数为传递的内容。</li>
+<li>最后是销毁方法，通过removeObserver进行移除监听者。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/06/NSDictionary(不可变字典）/" rel="next" title="Objective-C中的字典">
+                <i class="fa fa-chevron-left"></i> Objective-C中的字典
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Leyiteyanzhi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KVC"><span class="nav-number">1.</span> <span class="nav-text">KVC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KVC是什么"><span class="nav-number">1.1.</span> <span class="nav-text">KVC是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVC的基本用法"><span class="nav-number">1.2.</span> <span class="nav-text">KVC的基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用范例"><span class="nav-number">1.3.</span> <span class="nav-text">使用范例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KVO"><span class="nav-number">2.</span> <span class="nav-text">KVO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KVO是什么"><span class="nav-number">2.1.</span> <span class="nav-text">KVO是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本用法"><span class="nav-number">2.2.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用步骤"><span class="nav-number">2.3.</span> <span class="nav-text">使用步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#demo"><span class="nav-number">2.4.</span> <span class="nav-text">demo</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leyiteyanzhi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
