@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="UIButton基础UIButton的控件基本概念UIButton的创建方法UIButton的类型可显示图片的UIButton UIButton事件UIButton的事件概念UIButton的添加方法UIButton的响应函数多按钮使用同一事件函数">
+<meta name="description" content="UIButton基础UIButton的控件基本概念​    UIButton是一个非常重要的UI控件，俗称“按钮”，一般情况下，点击某个控件后，会做出相应反应的都是按钮，按钮的功能比较多，既能显示文字，又能显示图片，还能随时调整内部图片和文字的位置 UIButton的创建方法 创建一个自定义类型的button，UIButtonTypeRoundedRect为圆角类型的button 1UIButto">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS中的UIButton">
 <meta property="og:url" content="http://yoursite.com/2018/07/10/iOS中的UIButton/index.html">
 <meta property="og:site_name" content="0-1">
-<meta property="og:description" content="UIButton基础UIButton的控件基本概念UIButton的创建方法UIButton的类型可显示图片的UIButton UIButton事件UIButton的事件概念UIButton的添加方法UIButton的响应函数多按钮使用同一事件函数">
+<meta property="og:description" content="UIButton基础UIButton的控件基本概念​    UIButton是一个非常重要的UI控件，俗称“按钮”，一般情况下，点击某个控件后，会做出相应反应的都是按钮，按钮的功能比较多，既能显示文字，又能显示图片，还能随时调整内部图片和文字的位置 UIButton的创建方法 创建一个自定义类型的button，UIButtonTypeRoundedRect为圆角类型的button 1UIButto">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-10T07:57:01.798Z">
+<meta property="og:updated_time" content="2018-07-10T11:54:41.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中的UIButton">
-<meta name="twitter:description" content="UIButton基础UIButton的控件基本概念UIButton的创建方法UIButton的类型可显示图片的UIButton UIButton事件UIButton的事件概念UIButton的添加方法UIButton的响应函数多按钮使用同一事件函数">
+<meta name="twitter:description" content="UIButton基础UIButton的控件基本概念​    UIButton是一个非常重要的UI控件，俗称“按钮”，一般情况下，点击某个控件后，会做出相应反应的都是按钮，按钮的功能比较多，既能显示文字，又能显示图片，还能随时调整内部图片和文字的位置 UIButton的创建方法 创建一个自定义类型的button，UIButtonTypeRoundedRect为圆角类型的button 1UIButto">
 
 
 
@@ -299,8 +299,72 @@
       
 
       
-        <h2 id="UIButton基础"><a href="#UIButton基础" class="headerlink" title="UIButton基础"></a>UIButton基础</h2><h3 id="UIButton的控件基本概念"><a href="#UIButton的控件基本概念" class="headerlink" title="UIButton的控件基本概念"></a>UIButton的控件基本概念</h3><h3 id="UIButton的创建方法"><a href="#UIButton的创建方法" class="headerlink" title="UIButton的创建方法"></a>UIButton的创建方法</h3><h3 id="UIButton的类型"><a href="#UIButton的类型" class="headerlink" title="UIButton的类型"></a>UIButton的类型</h3><h3 id="可显示图片的UIButton"><a href="#可显示图片的UIButton" class="headerlink" title="可显示图片的UIButton"></a>可显示图片的UIButton</h3><hr>
-<h2 id="UIButton事件"><a href="#UIButton事件" class="headerlink" title="UIButton事件"></a>UIButton事件</h2><h3 id="UIButton的事件概念"><a href="#UIButton的事件概念" class="headerlink" title="UIButton的事件概念"></a>UIButton的事件概念</h3><h3 id="UIButton的添加方法"><a href="#UIButton的添加方法" class="headerlink" title="UIButton的添加方法"></a>UIButton的添加方法</h3><h3 id="UIButton的响应函数"><a href="#UIButton的响应函数" class="headerlink" title="UIButton的响应函数"></a>UIButton的响应函数</h3><h3 id="多按钮使用同一事件函数"><a href="#多按钮使用同一事件函数" class="headerlink" title="多按钮使用同一事件函数"></a>多按钮使用同一事件函数</h3>
+        <h2 id="UIButton基础"><a href="#UIButton基础" class="headerlink" title="UIButton基础"></a>UIButton基础</h2><h3 id="UIButton的控件基本概念"><a href="#UIButton的控件基本概念" class="headerlink" title="UIButton的控件基本概念"></a>UIButton的控件基本概念</h3><p>​    UIButton是一个非常重要的UI控件，俗称“按钮”，一般情况下，点击某个控件后，会做出相应反应的都是按钮，按钮的功能比较多，<strong>既能显示文字，又能显示图片</strong>，还能随时调整内部图片和文字的位置</p>
+<h3 id="UIButton的创建方法"><a href="#UIButton的创建方法" class="headerlink" title="UIButton的创建方法"></a>UIButton的创建方法</h3><ol>
+<li><p>创建一个自定义类型的button，UIButtonTypeRoundedRect为圆角类型的button</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置button的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.frame = CGRectMake(100, 100, 100, 40);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置button的文字内容以及状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//@parameter</span><br><span class="line">//p1:字符串类型，显示到按钮上的文字</span><br><span class="line">//p2:设置文字显示的状态类型:为枚举常量</span><br><span class="line">//正常(normal)：默认情况，对应的枚举常量：UIControlStateNormal</span><br><span class="line">//高亮(lighted)：按钮按下去的时候(手指还未松开)，对应的枚举常量：UIControlStateHighlighted</span><br><span class="line">//选中(selected)：按钮被设置成选中状态，对应的枚举常量：UIControlStateSelected</span><br><span class="line">//禁止(diabled)：失效状态，对应的枚举常量：UIControlStateDisabled</span><br><span class="line">[btn setTitle:@&quot;button1&quot; forState:UIControlStateNormal];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置button的背景颜色</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.backgroundColor = [UIColor grayColor];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置文字显示的颜色</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//p1:颜色</span><br><span class="line">//p2:状态</span><br><span class="line">[btn setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];</span><br><span class="line">[btn setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置button的风格颜色</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[btn setTintColor:[UIColor whiteColor]];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置button内字体的大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.titleLabel.font = [UIFont systemFontOfSize:12];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="UIButton的类型"><a href="#UIButton的类型" class="headerlink" title="UIButton的类型"></a>UIButton的类型</h3><p>​    正常(normal)：默认情况，对应的枚举常量：UIControlStateNormal</p>
+<p>​    高亮(lighted)：按钮按下去的时候(手指还未松开)，对应的枚举常量：UIControlStateHighlighted </p>
+<p>​    选中(selected)：按钮被设置成选中状态，对应的枚举常量：UIControlStateSelected</p>
+<p>​    禁止(diabled)：失效状态，对应的枚举常量：UIControlStateDisabled</p>
+<h3 id="可显示图片的UIButton"><a href="#可显示图片的UIButton" class="headerlink" title="可显示图片的UIButton"></a>可显示图片的UIButton</h3><ol>
+<li><p>创建一个可以显示图片的button</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UIButton *btnImage = [UIButton buttonWithType:UIButtonTypeCustom];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取图片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UIImage *icon01 = [UIImage imageNamed:@&quot;icon01.png&quot;];</span><br><span class="line">UIImage *icon02 = [UIImage imageNamed:@&quot;icon02.png&quot;];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置button图片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//p1:显示的图片对象</span><br><span class="line">//p2:控件的状态</span><br><span class="line">[btnImage setImage:icon01 forState:UIControlStateNormal];</span><br><span class="line">[btnImage setImage:icon02 forState:UIControlStateHighlighted];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h2 id="UIButton事件"><a href="#UIButton事件" class="headerlink" title="UIButton事件"></a>UIButton事件</h2><h3 id="UIButton的事件概念"><a href="#UIButton的事件概念" class="headerlink" title="UIButton的事件概念"></a>UIButton的事件概念</h3><h3 id="UIButton的添加方法"><a href="#UIButton的添加方法" class="headerlink" title="UIButton的添加方法"></a>UIButton的添加方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;ViewController.h&quot;</span><br><span class="line"></span><br><span class="line">@interface ViewController ()</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">//创建按钮函数</span><br><span class="line">- (void) createBtn</span><br><span class="line">&#123;</span><br><span class="line">    //创建圆角按钮</span><br><span class="line">    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];</span><br><span class="line">    </span><br><span class="line">    btn.frame = CGRectMake(100, 100, 80, 40);</span><br><span class="line">    </span><br><span class="line">    [btn setTitle:@&quot;button&quot; forState:UIControlStateNormal];</span><br><span class="line">    </span><br><span class="line">    //向按钮添加事件函数</span><br><span class="line">    //p1:“谁”来实现事件函数，实现的对象就是”谁“</span><br><span class="line">    //p2:@selector(pressBtn):函数对象，当按钮满足p3事件类型时，调用函数，如果带有参数在后面加上：</span><br><span class="line">    //p3:UIControlEvent:事件处理函数类型</span><br><span class="line">    //UIControlEventTouchUpInside：当手指离开屏幕时并且手指的位置在按钮范围内触发事件函数</span><br><span class="line">    //UIControlEventTouchDown:当手指按下时</span><br><span class="line">    [btn addTarget:self action:@selector(pressBtn:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    [btn addTarget:self action:@selector(touchDown) forControlEvents:UIControlEventTouchDown];</span><br><span class="line">    </span><br><span class="line">    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];</span><br><span class="line">    btn2.frame = CGRectMake(100, 300, 80, 40);</span><br><span class="line">    [btn2 setTitle:@&quot;button2&quot; forState:UIControlStateNormal];</span><br><span class="line">    </span><br><span class="line">    //是可以多个按钮使用同一个事件函数来处理不同的函数</span><br><span class="line">    [btn2 addTarget:self action:@selector(pressBtn:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    </span><br><span class="line">    //给按钮可以设置tag值用于标记</span><br><span class="line">    btn.tag = 101;</span><br><span class="line">    btn2.tag = 102;</span><br><span class="line">    </span><br><span class="line">    [self.view addSubview:btn];</span><br><span class="line">    [self.view addSubview:btn2];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//参数为按钮本身</span><br><span class="line">- (void) pressBtn:(UIButton *)btn</span><br><span class="line">&#123;</span><br><span class="line">    if (btn.tag == 101) &#123;</span><br><span class="line">        NSLog(@&quot;点击button1&quot;);</span><br><span class="line">    &#125;else if (btn.tag == 102)&#123;</span><br><span class="line">        NSLog(@&quot;点击button2&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//- (void) pressBtn</span><br><span class="line">//&#123;</span><br><span class="line">//    NSLog(@&quot;点击button&quot;);</span><br><span class="line">//&#125;</span><br><span class="line"></span><br><span class="line">- (void) touchDown</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;touchDown&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    // Do any additional setup after loading the view, typically from a nib.</span><br><span class="line">    </span><br><span class="line">    [self createBtn];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)didReceiveMemoryWarning &#123;</span><br><span class="line">    [super didReceiveMemoryWarning];</span><br><span class="line">    // Dispose of any resources that can be recreated.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>通过[btn addTarget:self action:@selector(pressBtn:) forControlEvents:UIControlEventTouchUpInside];为事件添加方法：</p>
+<p>p1:“谁”来实现事件函数，实现的对象就是”谁“ </p>
+<p>p2:@selector(pressBtn):函数对象，当按钮满足p3事件类型时，调用函数，如果带有参数在后面加上： </p>
+<p>p3:UIControlEvent:事件处理函数类型</p>
+<h3 id="UIButton的响应函数"><a href="#UIButton的响应函数" class="headerlink" title="UIButton的响应函数"></a>UIButton的响应函数</h3><blockquote>
+<p>UIControlEventTouchDown 单点触摸按下事件：用户点触屏幕，或者又有新手指落下的时候。 </p>
+<p>UIControlEventTouchDownRepeat 多点触摸按下事件，点触计数大于1：用户按下第二、三、或第四根手指的时候。 </p>
+<p>UIControlEventTouchDragInside 当一次触摸在控件窗口内拖动时。 </p>
+<p>UIControlEventTouchDragOutside 当一次触摸在控件窗口之外拖动时。 </p>
+<p>UIControlEventTouchDragEnter 当一次触摸从控件窗口之外拖动到内部时。 </p>
+<p>UIControlEventTouchDragExit 当一次触摸从控件窗口内部拖动到外部时。 </p>
+<p>UIControlEventTouchUpInside 所有在控件之内触摸抬起事件。 </p>
+<p>UIControlEventTouchUpOutside 所有在控件之外触摸抬起事件(点触必须开始与控件内部才会发送通知)。</p>
+<p>UIControlEventTouchCancel 所有触摸取消事件，即一次触摸因为放上了太多手指而被取消，或者被上锁或者电话呼叫打断。</p>
+<p>UIControlEventTouchChanged 当控件的值发生改变时，发送通知。用于滑块、分段控件、以及其他取值的控件。你可以配置滑块控件何时发送通知，在滑块被放下时发送，或者在被拖动时发送。</p>
+<p>UIControlEventEditingDidBegin 当文本控件中开始编辑时发送通知。</p>
+<p>UIControlEventEditingChanged 当文本控件中的文本被改变时发送通知。</p>
+<p>UIControlEventEditingDidEnd 当文本控件中编辑结束时发送通知。 </p>
+<p>UIControlEventEditingDidOnExit 当文本控件内通过按下回车键（或等价行为）结束编辑时，发送通知。</p>
+<p>UIControlEventAlltouchEvents 通知所有触摸事件。</p>
+<p>UIControlEventAllEditingEvents 通知所有关于文本编辑的事件。 </p>
+<p>UIControlEventAllEvents 通知所有事件</p>
+</blockquote>
+<h3 id="多按钮使用同一事件函数"><a href="#多按钮使用同一事件函数" class="headerlink" title="多按钮使用同一事件函数"></a>多按钮使用同一事件函数</h3><p>​    允许多个按钮使用同一个事件函数来处理不同的函数，如果需要区分是不同的按钮使用了某个方法，可以通过tag为按钮设置值</p>
+
       
     </div>
     
