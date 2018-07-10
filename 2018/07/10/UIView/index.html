@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="UIView基本概念UIView的基本概念UIView的基本属性UIView的层级关系">
+<meta name="description" content="title：iOS中的UIViewUIView基本概念UIView的基本概念​    UIView是iOS中的视图对象，是显示在屏幕上的所有的对象的基础类。所有显示在屏幕上的对象一定都继承于UIView，都是UIView的子类。UIView是一个矩形对象，可以显示，并有层级关系 UIView的基本属性 创建一个UIView对象 1UIView *view = [[UIView alloc] in">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-1">
 <meta property="og:url" content="http://yoursite.com/2018/07/10/UIView/index.html">
 <meta property="og:site_name" content="0-1">
-<meta property="og:description" content="UIView基本概念UIView的基本概念UIView的基本属性UIView的层级关系">
+<meta property="og:description" content="title：iOS中的UIViewUIView基本概念UIView的基本概念​    UIView是iOS中的视图对象，是显示在屏幕上的所有的对象的基础类。所有显示在屏幕上的对象一定都继承于UIView，都是UIView的子类。UIView是一个矩形对象，可以显示，并有层级关系 UIView的基本属性 创建一个UIView对象 1UIView *view = [[UIView alloc] in">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-10T08:08:11.462Z">
+<meta property="og:updated_time" content="2018-07-10T09:43:49.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="0-1">
-<meta name="twitter:description" content="UIView基本概念UIView的基本概念UIView的基本属性UIView的层级关系">
+<meta name="twitter:description" content="title：iOS中的UIViewUIView基本概念UIView的基本概念​    UIView是iOS中的视图对象，是显示在屏幕上的所有的对象的基础类。所有显示在屏幕上的对象一定都继承于UIView，都是UIView的子类。UIView是一个矩形对象，可以显示，并有层级关系 UIView的基本属性 创建一个UIView对象 1UIView *view = [[UIView alloc] in">
 
 
 
@@ -299,7 +299,33 @@
       
 
       
-        <h2 id="UIView基本概念"><a href="#UIView基本概念" class="headerlink" title="UIView基本概念"></a>UIView基本概念</h2><h3 id="UIView的基本概念"><a href="#UIView的基本概念" class="headerlink" title="UIView的基本概念"></a>UIView的基本概念</h3><h3 id="UIView的基本属性"><a href="#UIView的基本属性" class="headerlink" title="UIView的基本属性"></a>UIView的基本属性</h3><h3 id="UIView的层级关系"><a href="#UIView的层级关系" class="headerlink" title="UIView的层级关系"></a>UIView的层级关系</h3>
+        <hr>
+<h2 id="title：iOS中的UIView"><a href="#title：iOS中的UIView" class="headerlink" title="title：iOS中的UIView"></a>title：iOS中的UIView</h2><h2 id="UIView基本概念"><a href="#UIView基本概念" class="headerlink" title="UIView基本概念"></a>UIView基本概念</h2><h3 id="UIView的基本概念"><a href="#UIView的基本概念" class="headerlink" title="UIView的基本概念"></a>UIView的基本概念</h3><p>​    UIView是iOS中的视图对象，是显示在屏幕上的所有的对象的基础类。所有显示在屏幕上的对象一定都继承于UIView，都是UIView的子类。UIView是一个矩形对象，可以显示，并有层级关系</p>
+<h3 id="UIView的基本属性"><a href="#UIView的基本属性" class="headerlink" title="UIView的基本属性"></a>UIView的基本属性</h3><ol>
+<li><p>创建一个UIView对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UIView *view = [[UIView alloc] init];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置UIView的位置</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.frame = CGRectMake(100, 100, 100, 100);</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>设置UIView的颜色</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.backgroundColor = [UIColor orangeColor];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将新创建的视图添加至父视图中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//1.将新建的视图显示到屏幕上</span><br><span class="line">//2.将视图作为父亲视图的子视图管理起来</span><br><span class="line">[self.view addSubview:view];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>是否隐藏视图对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//YES不显示，NO显示（默认值）</span><br><span class="line">view.hidden = NO;</span><br><span class="line">//设置是否显示不透明,YES显示为不透明，NO显示为透明</span><br><span class="line">view.opaque = NO;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将视图自身从父视图中删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//1.从父亲视图的管理中删除</span><br><span class="line">//2.不会显示在屏幕</span><br><span class="line">[view removeFromSuperview];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="UIView的层级关系"><a href="#UIView的层级关系" class="headerlink" title="UIView的层级关系"></a>UIView的层级关系</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">UIView *view01 = [[UIView alloc] init];</span><br><span class="line"></span><br><span class="line">view01.frame = CGRectMake(100, 100, 150, 150);</span><br><span class="line">view01.backgroundColor = [UIColor orangeColor];</span><br><span class="line"></span><br><span class="line">UIView *view02 = [[UIView alloc] init];</span><br><span class="line"></span><br><span class="line">view02.frame = CGRectMake(125, 125, 150, 150);</span><br><span class="line">view02.backgroundColor = [UIColor grayColor];</span><br><span class="line"></span><br><span class="line">UIView *view03 = [[UIView alloc] init];</span><br><span class="line"></span><br><span class="line">view03.frame = CGRectMake(150, 150, 150, 150);</span><br><span class="line">view03.backgroundColor = [UIColor blueColor];</span><br><span class="line"></span><br><span class="line">//将三个视图对象显示到屏幕上</span><br><span class="line">//并且添加到父亲视图中</span><br><span class="line">//哪一个视图被先添加到父亲视图中，就先绘制哪一个视图</span><br><span class="line">[self.view addSubview:view01];</span><br><span class="line">[self.view addSubview:view02];</span><br><span class="line">[self.view addSubview:view03];</span><br><span class="line"></span><br><span class="line">//将某一个视图调整到最前面显示</span><br><span class="line">//参数：UIView对象，调整哪一个视图到最前面</span><br><span class="line">[self.view bringSubviewToFront:view02];</span><br><span class="line"></span><br><span class="line">//将某一个视图调整到最后面显示</span><br><span class="line">//参数：UIView对象，调整哪一个视图到最后面</span><br><span class="line">[self.view sendSubviewToBack:view03];</span><br><span class="line"></span><br><span class="line">UIView *viewFront = self.view.subviews[2];</span><br><span class="line"></span><br><span class="line">UIView *viewBack = self.view.subviews[0];</span><br><span class="line"></span><br><span class="line">if (viewFront == view02) &#123;</span><br><span class="line">    NSLog(@&quot;viewFront相等&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (viewBack == view03) &#123;</span><br><span class="line">    NSLog(@&quot;viewBack相等&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    创建三个UIView对象，分别为view01、view02、view03，当通过[self.view addSubview:view01];将视图添加至父视图中时，哪一个视图被先添加到父亲视图中，就先绘制哪一个视图，最先添加的视图层级关系为最底层。</p>
+<p>​    将某一个视图调整到最前面显示：[self.view bringSubviewToFront:view02];</p>
+<p>​    将某一个视图调整到最后显示：[self.view sendSubviewToBack:view03];</p>
+
       
     </div>
     
@@ -445,7 +471,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UIView基本概念"><span class="nav-number">1.</span> <span class="nav-text">UIView基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UIView的基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">UIView的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIView的基本属性"><span class="nav-number">1.2.</span> <span class="nav-text">UIView的基本属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIView的层级关系"><span class="nav-number">1.3.</span> <span class="nav-text">UIView的层级关系</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#title：iOS中的UIView"><span class="nav-number">1.</span> <span class="nav-text">title：iOS中的UIView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIView基本概念"><span class="nav-number">2.</span> <span class="nav-text">UIView基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UIView的基本概念"><span class="nav-number">2.1.</span> <span class="nav-text">UIView的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIView的基本属性"><span class="nav-number">2.2.</span> <span class="nav-text">UIView的基本属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UIView的层级关系"><span class="nav-number">2.3.</span> <span class="nav-text">UIView的层级关系</span></a></li></ol></li></ol></div>
             
 
           </div>
