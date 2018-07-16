@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="0-1">
 <meta property="og:description" content="导航控制器导航控制器概念UINavigationController用来管理视图控制器，在多视图控制器中常用。 导航控制器的基本实现AppDelegate.m 首先在AppDelegate.m中创建一个根视图控制器以及导航控制器，然后将window的根视图设置为导航控制器 12345678910111213141516171819202122232425262728293031323334#imp">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-14T08:55:03.293Z">
+<meta property="og:updated_time" content="2018-07-16T02:48:56.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中的导航控制器">
 <meta name="twitter:description" content="导航控制器导航控制器概念UINavigationController用来管理视图控制器，在多视图控制器中常用。 导航控制器的基本实现AppDelegate.m 首先在AppDelegate.m中创建一个根视图控制器以及导航控制器，然后将window的根视图设置为导航控制器 12345678910111213141516171819202122232425262728293031323334#imp">
@@ -309,10 +309,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.title = @&quot;根视图&quot;;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.navigationItem.title = @&quot;title&quot;;</span><br></pre></td></tr></table></figure>
 <p>以上两种方法都可以设置标题文字，如果navigationItem为空，使用self.text作为标题，如果navigationItem不为空，使用self.navigationItem.title设置标题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//p1:按钮上的文字</span><br><span class="line">//p2:按钮风格</span><br><span class="line">//p3:事件拥有者</span><br><span class="line">//p4:按钮事件</span><br><span class="line">UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@&quot;左侧按钮&quot; style:UIBarButtonItemStyleDone target:self action:@selector(pressLeft)];</span><br><span class="line">   </span><br><span class="line">//将导航元素项的左侧按钮赋值</span><br><span class="line">self.navigationItem.leftBarButtonItem = leftBtn;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//p1:按钮上的文字</span><br><span class="line">//p2:按钮风格</span><br><span class="line">//p3:事件拥有者</span><br><span class="line">//p4:按钮事件</span><br><span class="line">UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@&quot;左侧按钮&quot; style:UIBarButtonItemStyleDone target:self action:@selector(pressLeft)];</span><br><span class="line">   </span><br><span class="line">//将导航元素项的左侧按钮赋值</span><br><span class="line">self.navigationItem.leftBarButtonItem = leftBtn;</span><br></pre></td></tr></table></figure>
-<ol start="2">
 <li><p>创建一个导航栏左侧的按钮,根据title文字来创建按钮</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//p1:按钮上的文字</span><br><span class="line">//p2:按钮风格</span><br><span class="line">//p3:事件拥有者</span><br><span class="line">//p4:按钮事件</span><br><span class="line">UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithTitle:@&quot;左侧按钮&quot; style:UIBarButtonItemStyleDone target:self action:@selector(pressLeft)];</span><br><span class="line"></span><br><span class="line">//将导航元素项的左侧按钮赋值</span><br><span class="line">self.navigationItem.leftBarButtonItem = leftBtn;</span><br></pre></td></tr></table></figure>
 </li>
