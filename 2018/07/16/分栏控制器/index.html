@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="分栏控制器分栏控制器的基本概念​    分栏控制器是管理多个视图控制器的管理控制器，通过数组的方式管理多个平行关系的视图控制器，与导航控制器的区别在于：导航控制器管理的是有层级关系的控制器。 ​    分栏控制器在同一个界面最多显示5个控制器切换按钮，超过5个小时会自动创建一个新的导航控制器来管理其余的控制器。 分栏控制器的实现 第一步，创建三个继承自UIViewController的类，分别命名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中的分栏控制器">
+<meta property="og:url" content="http://yoursite.com/2018/07/16/分栏控制器/index.html">
+<meta property="og:site_name" content="0-1">
+<meta property="og:description" content="分栏控制器分栏控制器的基本概念​    分栏控制器是管理多个视图控制器的管理控制器，通过数组的方式管理多个平行关系的视图控制器，与导航控制器的区别在于：导航控制器管理的是有层级关系的控制器。 ​    分栏控制器在同一个界面最多显示5个控制器切换按钮，超过5个小时会自动创建一个新的导航控制器来管理其余的控制器。 分栏控制器的实现 第一步，创建三个继承自UIViewController的类，分别命名">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-16T04:02:40.086Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中的分栏控制器">
+<meta name="twitter:description" content="分栏控制器分栏控制器的基本概念​    分栏控制器是管理多个视图控制器的管理控制器，通过数组的方式管理多个平行关系的视图控制器，与导航控制器的区别在于：导航控制器管理的是有层级关系的控制器。 ​    分栏控制器在同一个界面最多显示5个控制器切换按钮，超过5个小时会自动创建一个新的导航控制器来管理其余的控制器。 分栏控制器的实现 第一步，创建三个继承自UIViewController的类，分别命名">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/16/分栏控制器/"/>
+
+
+
+
+
+  <title>iOS中的分栏控制器 | 0-1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0-1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/分栏控制器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leyiteyanzhi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0-1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS中的分栏控制器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T12:00:57+08:00">
+                2018-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="分栏控制器"><a href="#分栏控制器" class="headerlink" title="分栏控制器"></a>分栏控制器</h2><h3 id="分栏控制器的基本概念"><a href="#分栏控制器的基本概念" class="headerlink" title="分栏控制器的基本概念"></a>分栏控制器的基本概念</h3><p>​    分栏控制器是管理多个视图控制器的管理控制器，通过数组的方式管理多个平行关系的视图控制器，与导航控制器的区别在于：导航控制器管理的是有层级关系的控制器。</p>
+<p>​    分栏控制器在同一个界面最多显示5个控制器切换按钮，超过5个小时会自动创建一个新的导航控制器来管理其余的控制器。</p>
+<h3 id="分栏控制器的实现"><a href="#分栏控制器的实现" class="headerlink" title="分栏控制器的实现"></a>分栏控制器的实现</h3><ol>
+<li><p>第一步，创建三个继承自UIViewController的类，分别命名为VCFirst、VCSecond、VCThird。在AppDelegate.m文件中创建控制视图并创建分栏控制对象。具体代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;AppDelegate.h&quot;</span><br><span class="line">#import &quot;VCFirst.h&quot;</span><br><span class="line">#import &quot;VCSecond.h&quot;</span><br><span class="line">#import &quot;VCThird.h&quot;</span><br><span class="line"></span><br><span class="line">@interface AppDelegate ()</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation AppDelegate</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions &#123;</span><br><span class="line">    // Override point for customization after application launch</span><br><span class="line">    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];</span><br><span class="line">    </span><br><span class="line">    [self.window makeKeyAndVisible];</span><br><span class="line">    </span><br><span class="line">    //创建视图控制器一二三</span><br><span class="line">    VCFirst *vcf = [[VCFirst alloc] init];</span><br><span class="line">    </span><br><span class="line">    VCSecond *vcs = [[VCSecond alloc] init];</span><br><span class="line">    vcs.view.backgroundColor = [UIColor orangeColor];</span><br><span class="line">    </span><br><span class="line">    VCThird *vct = [[VCThird alloc] init];</span><br><span class="line">    vct.view.backgroundColor = [UIColor greenColor];</span><br><span class="line">    </span><br><span class="line">    vcf.title = @&quot;视图1&quot;;</span><br><span class="line">    vcs.title = @&quot;视图2&quot;;</span><br><span class="line">    vct.title = @&quot;视图3&quot;;</span><br><span class="line">    </span><br><span class="line">    vcf.view.backgroundColor = [UIColor blueColor];</span><br><span class="line">    </span><br><span class="line">    //创建分栏控制器对象</span><br><span class="line">    UITabBarController *tbController = [[UITabBarController alloc] init];</span><br><span class="line">    </span><br><span class="line">    //创建一个控制器数组对象</span><br><span class="line">    //将所有被分栏控制器管理的对象添加到数组中</span><br><span class="line">    NSArray *arrayVC = [NSArray arrayWithObjects:vcf, vcs, vct, nil];</span><br><span class="line">    </span><br><span class="line">    //将分栏视图控制器管理数组赋值</span><br><span class="line">    tbController.viewControllers = arrayVC;</span><br><span class="line">    </span><br><span class="line">    //将分栏控制器作为根视图控制器</span><br><span class="line">    self.window.rootViewController = tbController;</span><br><span class="line">    </span><br><span class="line">    //设置选中的视图控制器的索引</span><br><span class="line">    //通过索引来确定显示哪一个控制器</span><br><span class="line">    tbController.selectedIndex = 2;</span><br><span class="line">    </span><br><span class="line">    //当前选中的控制器对象</span><br><span class="line">    if (tbController.selectedViewController == vct) &#123;</span><br><span class="line">        NSLog(@&quot;当前显示的是控制器3&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    //设置分栏控制器的工具栏的透明度</span><br><span class="line">    tbController.tabBar.translucent = NO;</span><br><span class="line">    </span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)applicationWillResignActive:(UIApplication *)application &#123;</span><br><span class="line">    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.</span><br><span class="line">    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)applicationDidEnterBackground:(UIApplication *)application &#123;</span><br><span class="line">    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.</span><br><span class="line">    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)applicationWillEnterForeground:(UIApplication *)application &#123;</span><br><span class="line">    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)applicationDidBecomeActive:(UIApplication *)application &#123;</span><br><span class="line">    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)applicationWillTerminate:(UIApplication *)application &#123;</span><br><span class="line">    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在VCFirst.m中创建分栏按钮</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;VCFirst.h&quot;</span><br><span class="line"></span><br><span class="line">@interface VCFirst ()</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation VCFirst</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    // Do any additional setup after loading the view.</span><br><span class="line">    </span><br><span class="line">    //创建一个分栏按钮对象</span><br><span class="line">    //方法一</span><br><span class="line">    //参数1:文字</span><br><span class="line">    //参数2:显示图片图标</span><br><span class="line">    //参数3:设置按钮的tag</span><br><span class="line">    //UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@&quot;111&quot; image:nil tag:101];</span><br><span class="line">    </span><br><span class="line">    //self.tabBarItem = tabBarItem;</span><br><span class="line">    </span><br><span class="line">    //方法二</span><br><span class="line">    //根据系统风格创建分栏按钮</span><br><span class="line">    //p1:系统风格设定</span><br><span class="line">    //p2:设置按钮的tag</span><br><span class="line">    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:101];</span><br><span class="line">    </span><br><span class="line">    //按钮右上角的提示信息</span><br><span class="line">    //通常用来提示未读的信息</span><br><span class="line">    tabBarItem.badgeValue = @&quot;22&quot;;</span><br><span class="line">    self.tabBarItem = tabBarItem;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)didReceiveMemoryWarning &#123;</span><br><span class="line">    [super didReceiveMemoryWarning];</span><br><span class="line">    // Dispose of any resources that can be recreated.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">#pragma mark - Navigation</span><br><span class="line"></span><br><span class="line">// In a storyboard-based application, you will often want to do a little preparation before navigation</span><br><span class="line">- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender &#123;</span><br><span class="line">    // Get the new view controller using [segue destinationViewController].</span><br><span class="line">    // Pass the selected object to the new view controller.</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>UITabBarItem：分栏按钮元素对象</p>
+<p>badgeValue：分栏按钮提示信息</p>
+<p>selectedIndex：分栏控制器选中的控制器索引</p>
+<p>viewControllers：分栏控制器管理数组</p>
+<p>selectedViewController：分栏控制器选中的控制器对象</p>
+</li>
+</ol>
+<h3 id="分栏控制器的协议方法"><a href="#分栏控制器的协议方法" class="headerlink" title="分栏控制器的协议方法"></a>分栏控制器的协议方法</h3><p>willBeginCustomizingViewControllers:即将显示编辑方法</p>
+<p>willEndCustomizingViewControllers：即将结束编辑方法</p>
+<p>didEndCustomizingViewControllers：已经结束编辑方法</p>
+<p>didSelectViewController：选中控制器切换方法</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/14/导航控制器/" rel="next" title="iOS中的导航控制器">
+                <i class="fa fa-chevron-left"></i> iOS中的导航控制器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Leyiteyanzhi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分栏控制器"><span class="nav-number">1.</span> <span class="nav-text">分栏控制器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分栏控制器的基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">分栏控制器的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分栏控制器的实现"><span class="nav-number">1.2.</span> <span class="nav-text">分栏控制器的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分栏控制器的协议方法"><span class="nav-number">1.3.</span> <span class="nav-text">分栏控制器的协议方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leyiteyanzhi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
