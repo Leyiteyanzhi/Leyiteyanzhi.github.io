@@ -83,7 +83,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS中的UITouch事件处理">
 <meta property="og:url" content="http://yoursite.com/2018/08/04/iOS中的UITouch事件处理/index.html">
-<meta property="og:site_name" content="0-1">
+<meta property="og:site_name" content="_(:_」∠)_">
 <meta property="og:description" content="iOS中的UITouch事件处理在iOS中并非任何对象都能用于处理事件，只有当对象是继承自 UIResponder 才能够接收事件并且处理事件。我们把这个称为“响应者对象” 其中，事件分为三大类型 分别为触摸事件、加速计事件（重力感应等）以及远程控制事件（耳机线控等） UIResponder 内部为不同的类型提供了相应的方法来处理事件  触摸事件 12345678//一根或者多根手指开始触摸vie">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/04/iOS中的UITouch事件处理/1434508-929235b2a2a63165.png">
@@ -127,7 +127,7 @@
 
 
 
-  <title>iOS中的UITouch事件处理 | 0-1</title>
+  <title>iOS中的UITouch事件处理 | _(:_」∠)_</title>
   
 
 
@@ -157,7 +157,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">0-1</span>
+        <span class="site-title">_(:_」∠)_</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -243,7 +243,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="0-1">
+      <meta itemprop="name" content="_(:_」∠)_">
     </span>
 
     
@@ -307,19 +307,19 @@
 <p>UIResponder 内部为不同的类型提供了相应的方法来处理事件</p>
 <ol>
 <li><p>触摸事件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//一根或者多根手指开始触摸view时自动调用view的下面方法</span><br><span class="line">- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;</span><br><span class="line">//一根或者多根手指在view上移动时自动调用view的下面方法（随着手指的移动，会持续调用该方法）</span><br><span class="line">- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;</span><br><span class="line">//一根或者多根手指离开view时自动调用view的下面方法</span><br><span class="line">- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;</span><br><span class="line">//触摸结束前，某个系统事件(例如电话呼入)会打断触摸过程时自动调用view的下面方法</span><br><span class="line">- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一根或者多根手指开始触摸view时自动调用view的下面方法</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">touchesBegan:</span>(NSSet *)touches <span class="string">withEvent:</span>(UIEvent *)event;</span><br><span class="line"><span class="comment">//一根或者多根手指在view上移动时自动调用view的下面方法（随着手指的移动，会持续调用该方法）</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">touchesMoved:</span>(NSSet *)touches <span class="string">withEvent:</span>(UIEvent *)event;</span><br><span class="line"><span class="comment">//一根或者多根手指离开view时自动调用view的下面方法</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">touchesEnded:</span>(NSSet *)touches <span class="string">withEvent:</span>(UIEvent *)event;</span><br><span class="line"><span class="comment">//触摸结束前，某个系统事件(例如电话呼入)会打断触摸过程时自动调用view的下面方法</span></span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">touchesCancelled:</span>(NSSet *)touches <span class="string">withEvent:</span>(UIEvent *)event;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>加速计事件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event;</span><br><span class="line">- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event;</span><br><span class="line">- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event;</span><br></pre></td></tr></table></figure>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- <span class="params">(void)</span>motionBegan:<span class="params">(UIEventSubtype)</span>motion withEvent:<span class="params">(UIEvent *)</span>event;</span><br><span class="line">- <span class="params">(void)</span>motionEnded:<span class="params">(UIEventSubtype)</span>motion withEvent:<span class="params">(UIEvent *)</span>event;</span><br><span class="line">- <span class="params">(void)</span>motionCancelled:<span class="params">(UIEventSubtype)</span>motion withEvent:<span class="params">(UIEvent *)</span>event;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>远程控制事件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)remoteControlReceivedWithEvent:(UIEvent *)event;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)remoteControlReceivedWithEvent:(UIEvent *)<span class="keyword">event</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="UITouch"><a href="#UITouch" class="headerlink" title="UITouch"></a>UITouch</h3><h4 id="UITouch的创建"><a href="#UITouch的创建" class="headerlink" title="UITouch的创建"></a>UITouch的创建</h4><p>每当用户通过手指触摸屏幕时，就会创建一个与之关联的 UITouch 对象，一根手指就对象一个 UITouch 对象。</p>
 <h4 id="UITouch的作用"><a href="#UITouch的作用" class="headerlink" title="UITouch的作用"></a>UITouch的作用</h4><p>UITouch 中记录下了手指触摸的位置、时间等。当手指进行移动时，就会重新更新 UITouch 对象，能够一直记录手指的最新的触摸位置。当手指离开屏幕时候，系统就会销毁响应的 UITouch 对象。</p>
-<h4 id="UITouch的常见属性"><a href="#UITouch的常见属性" class="headerlink" title="UITouch的常见属性"></a>UITouch的常见属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//触摸产生时所处的窗口</span><br><span class="line">@property(nonatomic,readonly,retain) UIWindow *window;</span><br><span class="line"></span><br><span class="line">//触摸产生时所处的视图</span><br><span class="line">@property(nonatomic,readonly,retain) UIView *view;</span><br><span class="line"></span><br><span class="line">//短时间内点按屏幕的次数，可以根据tapCount判断单击、双击或更多的点击</span><br><span class="line">@property(nonatomic,readonly) NSUInteger tapCount;</span><br><span class="line"></span><br><span class="line">//记录了触摸事件产生或变化时的时间，单位是秒</span><br><span class="line">@property(nonatomic,readonly) NSTimeInterval timestamp;</span><br><span class="line"></span><br><span class="line">//当前触摸事件所处的状态</span><br><span class="line">@property(nonatomic,readonly) UITouchPhase phase;</span><br></pre></td></tr></table></figure>
-<h4 id="UITouch的常见方法"><a href="#UITouch的常见方法" class="headerlink" title="UITouch的常见方法"></a>UITouch的常见方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (CGPoint)locationInView:(UIView *)view;</span><br><span class="line">//返回值表示触摸在view上的位置</span><br><span class="line">//这里返回的位置是针对view的坐标系的（以view的左上角为原点(0, 0)）</span><br><span class="line">//调用时传入的view参数为nil的话，返回的是触摸点在UIWindow的位置</span><br><span class="line"></span><br><span class="line">- (CGPoint)previousLocationInView:(UIView *)view;</span><br><span class="line">//记录了前一个触摸点的位置</span><br></pre></td></tr></table></figure>
+<h4 id="UITouch的常见属性"><a href="#UITouch的常见属性" class="headerlink" title="UITouch的常见属性"></a>UITouch的常见属性</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//触摸产生时所处的窗口</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">retain</span>) <span class="built_in">UIWindow</span> *window;</span><br><span class="line"></span><br><span class="line"><span class="comment">//触摸产生时所处的视图</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">retain</span>) <span class="built_in">UIView</span> *view;</span><br><span class="line"></span><br><span class="line"><span class="comment">//短时间内点按屏幕的次数，可以根据tapCount判断单击、双击或更多的点击</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>) <span class="built_in">NSUInteger</span> tapCount;</span><br><span class="line"></span><br><span class="line"><span class="comment">//记录了触摸事件产生或变化时的时间，单位是秒</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>) <span class="built_in">NSTimeInterval</span> timestamp;</span><br><span class="line"></span><br><span class="line"><span class="comment">//当前触摸事件所处的状态</span></span><br><span class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>) <span class="built_in">UITouchPhase</span> phase;</span><br></pre></td></tr></table></figure>
+<h4 id="UITouch的常见方法"><a href="#UITouch的常见方法" class="headerlink" title="UITouch的常见方法"></a>UITouch的常见方法</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-</span> (CGPoint)<span class="selector-tag">locationInView</span><span class="selector-pseudo">:(UIView</span> *)<span class="selector-tag">view</span>;</span><br><span class="line"><span class="comment">//返回值表示触摸在view上的位置</span></span><br><span class="line"><span class="comment">//这里返回的位置是针对view的坐标系的（以view的左上角为原点(0, 0)）</span></span><br><span class="line"><span class="comment">//调用时传入的view参数为nil的话，返回的是触摸点在UIWindow的位置</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">-</span> (CGPoint)<span class="selector-tag">previousLocationInView</span><span class="selector-pseudo">:(UIView</span> *)<span class="selector-tag">view</span>;</span><br><span class="line"><span class="comment">//记录了前一个触摸点的位置</span></span><br></pre></td></tr></table></figure>
 <h4 id="UIEvent事件对象"><a href="#UIEvent事件对象" class="headerlink" title="UIEvent事件对象"></a>UIEvent事件对象</h4><p>UIEvent 为事件对象，会记录下事件产生的时间和类型，每次产生一个事件就会生成一个 UIEvent 对象。</p>
 <p>一个完整的触摸过程包括触摸开始、触摸移动、触摸结束、触摸取消（不一定）。</p>
 <p>触摸开始：- (void)touchesBegan:(NSSet <em>)touches withEvent:(UIEvent </em>)event</p>
@@ -340,16 +340,16 @@
 <li>如果符合的子控件，那就由自己来处理触摸事件。</li>
 </ol>
 <p>在 UIView 中提供了两种方法来寻找合适的 View</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 用来寻找最合适的View处理事件，只要一个事件传递给一个控件就会调用控件的hitTest方法，参数point 表示方法调用者坐标系上的点</span><br><span class="line">- (nullable UIView *)hitTest:(CGPoint)point withEvent:(nullable UIEvent *)event;   </span><br><span class="line"></span><br><span class="line">// 用来判断当前这个点在不在方法调用者上，点必须在方法调用者的坐标系中，判断才会准确</span><br><span class="line">- (BOOL)pointInside:(CGPoint)point withEvent:(nullable UIEvent *)event;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用来寻找最合适的View处理事件，只要一个事件传递给一个控件就会调用控件的hitTest方法，参数point 表示方法调用者坐标系上的点</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="built_in">UIView</span> *)hitTest:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="keyword">nullable</span> <span class="built_in">UIEvent</span> *)event;   </span><br><span class="line"></span><br><span class="line"><span class="comment">// 用来判断当前这个点在不在方法调用者上，点必须在方法调用者的坐标系中，判断才会准确</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)pointInside:(<span class="built_in">CGPoint</span>)point withEvent:(<span class="keyword">nullable</span> <span class="built_in">UIEvent</span> *)event;</span><br></pre></td></tr></table></figure>
 <h4 id="UIView-不接收触摸事件的情况"><a href="#UIView-不接收触摸事件的情况" class="headerlink" title="UIView 不接收触摸事件的情况"></a>UIView 不接收触摸事件的情况</h4><ol>
 <li><p>不接受用户交互</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx.userInteractionEnabled = NO;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">xxx.userInteractionEnabled</span> <span class="string">=</span> <span class="literal">NO</span><span class="string">;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>隐藏</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx.hidden = YES;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">xxx.hidden</span> <span class="string">=</span> <span class="literal">YES</span><span class="string">;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>透明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx.alpha = 0.0 ～ 0.01</span><br></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx.alpha = <span class="number">0.0</span> ～ <span class="number">0.01</span></span><br></pre></td></tr></table></figure>
 <p>其中，UIImageView 的 userInteractionEnabled 默认为 NO ， 因此UIImageView 以及它的子控件默认是不能接收触摸事件的。如需设置可接收触摸事件需要将 userInteractionEnabled 设置为 YES。</p>
 </li>
 </ol>

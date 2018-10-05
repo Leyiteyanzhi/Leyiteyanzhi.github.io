@@ -83,7 +83,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS中的UIViewController">
 <meta property="og:url" content="http://yoursite.com/2018/07/10/iOS中的UIViewController/index.html">
-<meta property="og:site_name" content="0-1">
+<meta property="og:site_name" content="_(:_」∠)_">
 <meta property="og:description" content="UIViewControllerUIViewController的概念 每个UIViewController都有一个view属性，来显示该控制器的样式； UIViewController负责管理在view上显示的数据，并协调他们和应用程序其他部分的关系； UIViewController类负责创建其管理的视图及在低内存时将它们从内容中移出（didReceiveMemoryWarning方法中实现）">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/10/iOS中的UIViewController/VCPG-root-view-controller_2-1_2x-300x195.png">
@@ -128,7 +128,7 @@
 
 
 
-  <title>iOS中的UIViewController | 0-1</title>
+  <title>iOS中的UIViewController | _(:_」∠)_</title>
   
 
 
@@ -158,7 +158,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">0-1</span>
+        <span class="site-title">_(:_」∠)_</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -244,7 +244,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="0-1">
+      <meta itemprop="name" content="_(:_」∠)_">
     </span>
 
     
@@ -351,10 +351,10 @@
 <img src="/2018/07/10/iOS中的UIViewController/VCPG-presented-view-controllers_2-3_2x.png" title="UIViewController的显示和移除">
 <ul>
 <li><p>显示一个普通类型的控制器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//当屏幕被按下，调用此函数</span><br><span class="line">- (void) touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event &#123;</span><br><span class="line">    //创建视图控制器2</span><br><span class="line">    View02ViewController *view2 = [[View02ViewController alloc] init];</span><br><span class="line">    </span><br><span class="line">    //显示一个新的视图控制器到屏幕上</span><br><span class="line">    //p1:新的视图控制对象</span><br><span class="line">    //p2:使用动画切换动画效果</span><br><span class="line">    //p3:切换结束后功能调用，不需要即传nil值即可</span><br><span class="line">    [self presentViewController:view2 animated:YES completion:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当屏幕被按下，调用此函数</span></span><br><span class="line">- (<span class="keyword">void</span>) touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;</span><br><span class="line">    <span class="comment">//创建视图控制器2</span></span><br><span class="line">    View02ViewController *view2 = [[View02ViewController alloc] init];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//显示一个新的视图控制器到屏幕上</span></span><br><span class="line">    <span class="comment">//p1:新的视图控制对象</span></span><br><span class="line">    <span class="comment">//p2:使用动画切换动画效果</span></span><br><span class="line">    <span class="comment">//p3:切换结束后功能调用，不需要即传nil值即可</span></span><br><span class="line">    [<span class="keyword">self</span> presentViewController:view2 animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>移除一个普通类型的控制器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//点击当前控制器2的界面时</span><br><span class="line">- (void) touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event</span><br><span class="line">&#123;</span><br><span class="line">    //让当前的控制器消失</span><br><span class="line">    //p1:是否有动画效果</span><br><span class="line">    //p2:结束后是否功能调用，不需要穿nil值即可</span><br><span class="line">    [self dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//点击当前控制器2的界面时</span></span><br><span class="line">- (<span class="keyword">void</span>) touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//让当前的控制器消失</span></span><br><span class="line">    <span class="comment">//p1:是否有动画效果</span></span><br><span class="line">    <span class="comment">//p2:结束后是否功能调用，不需要穿nil值即可</span></span><br><span class="line">    [<span class="keyword">self</span> dismissViewControllerAnimated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>需要注意的是，如果执行多次presentViewController：操作，新显示的控制器view会覆盖之前的控制器view，但旧的控制器view不会销毁，而是会被隐藏，直至执行了dismissViewControllerAnimated：方法，才会被销毁。</p>
 </li>
 </ul>
