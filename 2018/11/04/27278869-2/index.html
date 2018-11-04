@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、关于 UIMenuController 的认识在 iOS 开发的默认情况之下， UITextView、UITextField、UIWebView 都具备倾国自带的 UIMenuController 功能，并且系统针对当前情况弹出与之匹配的彩蛋选项。 二、UIMenuController 的基本使用123456789101112131415161718192021222324252627282">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 中的 UIMenuController">
+<meta property="og:url" content="http://yoursite.com/2018/11/04/27278869-2/index.html">
+<meta property="og:site_name" content="_(:_」∠)_">
+<meta property="og:description" content="一、关于 UIMenuController 的认识在 iOS 开发的默认情况之下， UITextView、UITextField、UIWebView 都具备倾国自带的 UIMenuController 功能，并且系统针对当前情况弹出与之匹配的彩蛋选项。 二、UIMenuController 的基本使用123456789101112131415161718192021222324252627282">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/11/04/27278869-2/IMG_3995.JPG">
+<meta property="og:updated_time" content="2018-11-04T12:25:42.756Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 中的 UIMenuController">
+<meta name="twitter:description" content="一、关于 UIMenuController 的认识在 iOS 开发的默认情况之下， UITextView、UITextField、UIWebView 都具备倾国自带的 UIMenuController 功能，并且系统针对当前情况弹出与之匹配的彩蛋选项。 二、UIMenuController 的基本使用123456789101112131415161718192021222324252627282">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/04/27278869-2/IMG_3995.JPG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/04/27278869-2/"/>
+
+
+
+
+
+  <title>iOS 中的 UIMenuController | _(:_」∠)_</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">_(:_」∠)_</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/27278869-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Leyiteyanzhi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="_(:_」∠)_">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 中的 UIMenuController</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T20:24:00+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/2018/11/04/27278869-2/IMG_3995.JPG">
+<h3 id="一、关于-UIMenuController-的认识"><a href="#一、关于-UIMenuController-的认识" class="headerlink" title="一、关于 UIMenuController 的认识"></a>一、关于 UIMenuController 的认识</h3><p>在 iOS 开发的默认情况之下， UITextView、UITextField、UIWebView 都具备倾国自带的 UIMenuController 功能，并且系统针对当前情况弹出与之匹配的彩蛋选项。</p>
+<h3 id="二、UIMenuController-的基本使用"><a href="#二、UIMenuController-的基本使用" class="headerlink" title="二、UIMenuController 的基本使用"></a>二、UIMenuController 的基本使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#if USE_UIKIT_PUBLIC_HEADERS || !__has_include(&lt;UIKitCore/UIMenuController.h&gt;)</span><br><span class="line">//</span><br><span class="line">//  UIMenuController.h</span><br><span class="line">//  UIKit</span><br><span class="line">//</span><br><span class="line">//  Copyright (c) 2009-2018 Apple Inc. All rights reserved.</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line">#import &lt;CoreGraphics/CoreGraphics.h&gt;</span><br><span class="line">#import &lt;UIKit/UIKitDefines.h&gt;</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_BEGIN</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, UIMenuControllerArrowDirection) &#123;</span><br><span class="line">    UIMenuControllerArrowDefault, // up or down based on screen location</span><br><span class="line">    UIMenuControllerArrowUp NS_ENUM_AVAILABLE_IOS(3_2),</span><br><span class="line">    UIMenuControllerArrowDown NS_ENUM_AVAILABLE_IOS(3_2),</span><br><span class="line">    UIMenuControllerArrowLeft NS_ENUM_AVAILABLE_IOS(3_2),</span><br><span class="line">    UIMenuControllerArrowRight NS_ENUM_AVAILABLE_IOS(3_2),</span><br><span class="line">&#125; __TVOS_PROHIBITED;</span><br><span class="line"></span><br><span class="line">@class UIView, UIMenuItem;</span><br><span class="line"></span><br><span class="line">NS_CLASS_AVAILABLE_IOS(3_0) __TVOS_PROHIBITED @interface UIMenuController : NSObject</span><br><span class="line"></span><br><span class="line">#if UIKIT_DEFINE_AS_PROPERTIES</span><br><span class="line">@property(class, nonatomic, readonly) UIMenuController *sharedMenuController;</span><br><span class="line">#else</span><br><span class="line">+ (UIMenuController *)sharedMenuController;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">@property(nonatomic,getter=isMenuVisible) BOOL menuVisible;	    // default is NO</span><br><span class="line">- (void)setMenuVisible:(BOOL)menuVisible animated:(BOOL)animated;</span><br><span class="line"></span><br><span class="line">- (void)setTargetRect:(CGRect)targetRect inView:(UIView *)targetView;</span><br><span class="line">@property(nonatomic) UIMenuControllerArrowDirection arrowDirection NS_AVAILABLE_IOS(3_2); // default is UIMenuControllerArrowDefault</span><br><span class="line">		</span><br><span class="line">@property(nullable, nonatomic,copy) NSArray&lt;UIMenuItem *&gt; *menuItems NS_AVAILABLE_IOS(3_2); // default is nil. these are in addition to the standard items</span><br><span class="line"></span><br><span class="line">- (void)update;	</span><br><span class="line"></span><br><span class="line">@property(nonatomic,readonly) CGRect menuFrame;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">UIKIT_EXTERN NSNotificationName const UIMenuControllerWillShowMenuNotification __TVOS_PROHIBITED;</span><br><span class="line">UIKIT_EXTERN NSNotificationName const UIMenuControllerDidShowMenuNotification __TVOS_PROHIBITED;</span><br><span class="line">UIKIT_EXTERN NSNotificationName const UIMenuControllerWillHideMenuNotification __TVOS_PROHIBITED;</span><br><span class="line">UIKIT_EXTERN NSNotificationName const UIMenuControllerDidHideMenuNotification __TVOS_PROHIBITED;</span><br><span class="line">UIKIT_EXTERN NSNotificationName const UIMenuControllerMenuFrameDidChangeNotification __TVOS_PROHIBITED;</span><br><span class="line"></span><br><span class="line">NS_CLASS_AVAILABLE_IOS(3_2) __TVOS_PROHIBITED @interface UIMenuItem : NSObject </span><br><span class="line"></span><br><span class="line">- (instancetype)initWithTitle:(NSString *)title action:(SEL)action NS_DESIGNATED_INITIALIZER;</span><br><span class="line"></span><br><span class="line">@property(nonatomic,copy) NSString *title;</span><br><span class="line">@property(nonatomic)      SEL       action;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">NS_ASSUME_NONNULL_END</span><br><span class="line"></span><br><span class="line">#else</span><br><span class="line">#import &lt;UIKitCore/UIMenuController.h&gt;</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<p>​    首先来看看头文件，首先通过枚举类型定义了五个弹窗方向，分别为默认/上/下/左/右。UIMenuController 继承自 NSObject，通过 shareMenuController 获取单例对象。其中 menuVisible 属性默认为 NO ，所以我们必须手动设置为 YES。通过 items 数组，可以给菜单设置多个自定义选项。不仅如此，系统还提供了可以监听 menu 的通知，用于监听显示/完全显示、即将隐藏/完全隐藏以及 frame 的比变化。</p>
+<ol>
+<li><p>获得 menu</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UIMenuController *menu = [UIMenuController sharedMenuController];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置 menu 显示位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CGRect rect = CGRectMake(10, 20, 10,20);</span><br><span class="line">[menu setTargetRect:rect inview:self.label];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>手动设置显示 menu</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[menu setMenuVisible:YES animated:YES];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>确定 menu 内部显示的内容</p>
+<p>​    通过 canPerformAction 方法告诉 UIMenuController 我们将要监听什么内容，返回值为 BOOL 类型，YES 则表示监听，将其显示在 menu 上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-(BOOL)canBecomeFirstResponder&#123;</span><br><span class="line">    return YES;   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (BOOL)canPerformAction:(SEL)action withSender:(id)sender</span><br><span class="line">&#123;</span><br><span class="line">NSLog(@&quot;%@&quot;, NSStringFromSelector(action));</span><br><span class="line">if (action == @selector(cut:)</span><br><span class="line">|| action == @selector(copy:)</span><br><span class="line">|| action == @selector(paste:)) &#123;</span><br><span class="line">return YES; // YES -&gt; 代表我们只监听 cut: / copy: / paste:方法</span><br><span class="line">&#125;</span><br><span class="line">return NO; // 除了上面的操作，都不支持，即隐藏系统默认的选项</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    在上面这段代码中，通过 NSStringFromSelector(action) 打印出了系统自带以及自定义的所有 action：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">2018-11-04 17:25:30.130398+0800 ManagePlus[72080:2805845] cut:</span><br><span class="line">2018-11-04 17:25:30.131669+0800 ManagePlus[72080:2805845] selectAll:</span><br><span class="line">2018-11-04 17:25:30.131886+0800 ManagePlus[72080:2805845] paste:</span><br><span class="line">2018-11-04 17:25:30.132063+0800 ManagePlus[72080:2805845] delete:</span><br><span class="line">2018-11-04 17:25:30.132198+0800 ManagePlus[72080:2805845] _promptForReplace:</span><br><span class="line">2018-11-04 17:25:30.132331+0800 ManagePlus[72080:2805845] _transliterateChinese:</span><br><span class="line">2018-11-04 17:25:30.132467+0800 ManagePlus[72080:2805845] _insertDrawing:</span><br><span class="line">2018-11-04 17:25:30.132597+0800 ManagePlus[72080:2805845] _showTextStyleOptions:</span><br><span class="line">2018-11-04 17:25:30.132756+0800 ManagePlus[72080:2805845] _lookup:</span><br><span class="line">2018-11-04 17:25:30.145192+0800 ManagePlus[72080:2805845] _define:</span><br><span class="line">2018-11-04 17:25:30.145615+0800 ManagePlus[72080:2805845] _addShortcut:</span><br><span class="line">2018-11-04 17:25:30.145826+0800 ManagePlus[72080:2805845] _accessibilitySpeak:</span><br><span class="line">2018-11-04 17:25:30.146321+0800 ManagePlus[72080:2805845] _accessibilitySpeakLanguageSelection:</span><br><span class="line">2018-11-04 17:25:30.146782+0800 ManagePlus[72080:2805845] _accessibilityPauseSpeaking:</span><br><span class="line">2018-11-04 17:25:30.147001+0800 ManagePlus[72080:2805845] _share:</span><br><span class="line">2018-11-04 17:25:30.147134+0800 ManagePlus[72080:2805845] makeTextWritingDirectionRightToLeft:</span><br><span class="line">2018-11-04 17:25:30.147298+0800 ManagePlus[72080:2805845] makeTextWritingDirectionRightToLeft:</span><br><span class="line">2018-11-04 17:25:30.147489+0800 ManagePlus[72080:2805845] readAloudAll</span><br></pre></td></tr></table></figure>
+<p>​    如上所示，系统提供给我们可以在监听的方法有 cut: / selectAll: / paste: / delete: / makeTextWritingDirectionRightToLeft / makeTextWritingDirectionRightToLeft 。而其他方法为私有方法，只有在默认时候系统才能自己调用，如需自定义中还需要其中某些功能只能够自己重写，而不能直接使用，最后一项 readAloutAll 为我自定义的方法，同样可以打印出来。</p>
+<p>​    另外，实现以上方法的前提是必须说明控制器可以成为第一响应者：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)canBecomeFirstResponder</span><br><span class="line">&#123;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关于自定义 menu</p>
+<p>​    正如上面第四点说到，menu 的选项中有很多私有的方法，在实际开发中，我们并不需要这些方法，因为 UIMenuItem 类提供给开发者进行自定义按钮和触发的方法：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIMenuItem</span> * item = [[<span class="built_in">UIMenuItem</span> alloc]initWithTitle:<span class="string">@"自定义"</span> action:<span class="keyword">@selector</span>(newFunc)];</span><br><span class="line">[[<span class="built_in">UIMenuController</span> sharedMenuController] setTargetRect:[sender frame] inView:<span class="keyword">self</span>.view];</span><br><span class="line">[<span class="built_in">UIMenuController</span> sharedMenuController].menuItems = @[item];</span><br><span class="line">[<span class="built_in">UIMenuController</span> sharedMenuController].menuVisible = <span class="literal">YES</span>;</span><br></pre></td></tr></table></figure>
+<p>​    这里简单的重新自定义了一个 title 为自定义的 menu，接下来只需要在 canPerformAction 方法中对其实现方法进行监听：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-(void)newFunc&#123;</span><br><span class="line">    NSLog(@&quot;自定义方法&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(BOOL)canBecomeFirstResponder&#123;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(BOOL)canPerformAction:(SEL)action withSender:(id)sender&#123;</span><br><span class="line">    if (action == @selector(newFunc)) &#123;</span><br><span class="line">        return YES;</span><br><span class="line">   &#125;</span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="三、给label-添加-UIMenuController-功能"><a href="#三、给label-添加-UIMenuController-功能" class="headerlink" title="三、给label 添加 UIMenuController 功能"></a>三、给label 添加 UIMenuController 功能</h3><p>​    由于 label 系统默认并不带 UIMenuController 功能，因为我们可以通过手动的方式为其添加：</p>
+<ol>
+<li><p>首先设置 UILabel 允许进行交互；</p>
+</li>
+<li><p>为 UILabel 添加手势；</p>
+</li>
+<li><p>在 UILabel 手势的监听方法中，创建 menu；    </p>
+</li>
+<li><p>让 label 成为第一响应者；</p>
+</li>
+<li><p>设置 menu 显示的 menuItem；</p>
+<p>实现代码例如以下demo：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;ABCLabel.h&quot;</span><br><span class="line"></span><br><span class="line">@implementation ABCLabel</span><br><span class="line"></span><br><span class="line">- (void)awakeFromNib</span><br><span class="line">&#123;</span><br><span class="line">   // 给Label添加手势 </span><br><span class="line">   [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)]];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-  (void)initWithFrame:(CGRect)rect&#123;</span><br><span class="line">   if(self = [super initWithFrame:rect])&#123;</span><br><span class="line">      // 给 Label 添加手势 </span><br><span class="line">      [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelClick)]];</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">- (void)labelClick</span><br><span class="line">&#123;</span><br><span class="line">    // 让 label 成为第一响应者</span><br><span class="line">    [self becomeFirstResponder];</span><br><span class="line">    </span><br><span class="line">    // 获得菜单</span><br><span class="line">    UIMenuController *menu = [UIMenuController sharedMenuController];</span><br><span class="line">    </span><br><span class="line">    // 设置菜单内容，显示中文，所以要手动设置app支持中文</span><br><span class="line">    menu.menuItems = @[</span><br><span class="line">                       [[UIMenuItem alloc] initWithTitle:@&quot;顶&quot; action:@selector(ding:)],</span><br><span class="line">                       [[UIMenuItem alloc] initWithTitle:@&quot;回复&quot; action:@selector(reply:)],</span><br><span class="line">                       [[UIMenuItem alloc] initWithTitle:@&quot;举报&quot; action:@selector(warn:)]</span><br><span class="line">                       ];</span><br><span class="line">    </span><br><span class="line">    // 菜单最终显示的位置</span><br><span class="line">    [menu setTargetRect:self.bounds inView:self];</span><br><span class="line">    </span><br><span class="line">    // 显示菜单</span><br><span class="line">    [menu setMenuVisible:YES animated:YES];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - UIMenuController相关</span><br><span class="line">/**</span><br><span class="line"> * 让Label具备成为第一响应者的资格</span><br><span class="line"> */</span><br><span class="line">- (BOOL)canBecomeFirstResponder</span><br><span class="line">&#123;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 通过第一响应者的这个方法告诉UIMenuController可以显示什么内容</span><br><span class="line"> */</span><br><span class="line">- (BOOL)canPerformAction:(SEL)action withSender:(id)sender</span><br><span class="line">&#123;</span><br><span class="line">    if ( (action == @selector(copy:) &amp;&amp; self.text) // 需要有文字才能支持复制</span><br><span class="line">        || (action == @selector(cut:) &amp;&amp; self.text) // 需要有文字才能支持剪切</span><br><span class="line">        || action == @selector(paste:)</span><br><span class="line">        || action == @selector(ding:)</span><br><span class="line">        || action == @selector(reply:)</span><br><span class="line">        || action == @selector(warn:)) return YES;</span><br><span class="line">    </span><br><span class="line">    return NO;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 监听MenuItem的点击事件</span><br><span class="line">- (void)cut:(UIMenuController *)menu</span><br><span class="line">&#123;</span><br><span class="line">    // 将label的文字存储到粘贴板</span><br><span class="line">    [UIPasteboard generalPasteboard].string = self.text;</span><br><span class="line">    // 清空文字</span><br><span class="line">    self.text = nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)copy:(UIMenuController *)menu</span><br><span class="line">&#123;</span><br><span class="line">    // 将label的文字存储到粘贴板</span><br><span class="line">    [UIPasteboard generalPasteboard].string = self.text;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)paste:(UIMenuController *)menu</span><br><span class="line">&#123;</span><br><span class="line">    // 将粘贴板的文字赋值给label</span><br><span class="line">    self.text = [UIPasteboard generalPasteboard].string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)ding:(UIMenuController *)menu</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;%s %@&quot;, __func__, menu);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)reply:(UIMenuController *)menu</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;%s %@&quot;, __func__, menu);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)warn:(UIMenuController *)menu</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;%s %@&quot;, __func__, menu);</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/05/27278869-1/" rel="next" title="UIApplication 生命周期中的代理方法">
+                <i class="fa fa-chevron-left"></i> UIApplication 生命周期中的代理方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Leyiteyanzhi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、关于-UIMenuController-的认识"><span class="nav-number">1.</span> <span class="nav-text">一、关于 UIMenuController 的认识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、UIMenuController-的基本使用"><span class="nav-number">2.</span> <span class="nav-text">二、UIMenuController 的基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、给label-添加-UIMenuController-功能"><span class="nav-number">3.</span> <span class="nav-text">三、给label 添加 UIMenuController 功能</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leyiteyanzhi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
